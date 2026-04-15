@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vibecoding Project — стартовая страница проекта">
+  <title>Vibecoding Project</title>
+  <style>
+    :root[data-theme="dark"] {
+      --bg: #0a0a0f;
+      --bg-card: #13131a;
+      --border: #1e1e2e;
+      --text: #e0e0e0;
+      --muted: #666;
+      --accent: #a78bfa;
+      --accent-2: #6ee7f7;
+      --toggle-bg: #13131a;
+    }
+    :root[data-theme="light"] {
+      --bg: #f8f8fc;
+      --bg-card: #ffffff;
+      --border: #e0e0f0;
+      --text: #111;
+      --muted: #666;
+      --accent: #7c3aed;
+      --accent-2: #0ea5e9;
+      --toggle-bg: #efefef;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s ease, color 0.3s ease;
+      line-height: 1.6;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      transition: background 0.3s ease;
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .theme-toggle {
+      background: var(--toggle-bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      cursor: pointer;
+      font-size: 0.82rem;
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .hero-badge span { color: var(--accent); font-weight: 600; }
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      animation: fadeUp 0.6s ease 0.4s both;
+    }
+    .btn:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      color: #fff;
+      border: none;
+    }
+
+    /* ── Features ── */
+    .features {
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .section-label {
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: var(--text);
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .card.visible {
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .card-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .card p { font-size: 0.88rem; color: var(--muted); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo">vibecoding</span>
+    <button class="theme-toggle" id="toggle"></button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">Версия <span>v1.0.0</span></div>
+    <h1>Vibecoding<br>Project</h1>
+    <p class="hero-sub">Стартовая точка для быстрого запуска идей. Чистый код, минималистичный дизайн.</p>
+    <a href="#features" class="btn btn-primary">Узнать больше</a>
+  </section>
+
+  <section class="features" id="features">
+    <p class="section-label">Возможности</p>
+    <h2 class="section-title">Что внутри</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Быстрый старт</h3>
+        <p>Никаких зависимостей — открой в браузере и начни работу сразу.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>Тёмная и светлая тема</h3>
+        <p>Переключение с сохранением в localStorage. CSS-переменные для удобной кастомизации.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <h3>Адаптивная вёрстка</h3>
+        <p>Корректно отображается на любом устройстве — от мобильного до широкого монитора.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Vibecoding Project
+  </footer>
+
+  <script>
+    // Theme toggle
+    const html = document.documentElement;
+    const btn = document.getElementById('toggle');
+
+    function applyTheme(theme) {
+      html.dataset.theme = theme;
+      btn.textContent = theme === 'dark' ? '☀ Светлая' : '☾ Тёмная';
+      localStorage.setItem('theme', theme);
+    }
+
+    applyTheme(localStorage.getItem('theme') || 'dark');
+    btn.addEventListener('click', () => {
+      applyTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
+    });
+
+    // Animate cards on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 120);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.card').forEach(card => observer.observe(card));
+  </script>
+</body>
+</html>
